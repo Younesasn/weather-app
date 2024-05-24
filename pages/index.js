@@ -12,8 +12,7 @@ import styles from "../styles/Home.module.css";
 
 export const App = () => {
   const [weatherData, setWeatherData] = useState();
-  const [triggerFetch, setTriggerFetch] = useState();
-  
+
   useEffect(() => {
     const getData = async () => {
       const res = await fetch("api/data");
@@ -23,34 +22,39 @@ export const App = () => {
     getData();
   }, []);
 
+  let now = new Date();
+  let currentHour = now.getHours();
+
   const name = weatherData?.geocoding.results[0].name;
   const country = weatherData?.geocoding.results[0].country;
-  const temp = weatherData?.weather.hourly.temperature_2m[0];
-  const time = weatherData?.weather.hourly.time[21];
   const timezone = weatherData?.weather.utc_offset_seconds;
-  const humidity = weatherData?.weather.hourly.relative_humidity_2m[0];
-  const windSpeed = weatherData?.weather.hourly.wind_speed_10m[0];
-  const windDirection = weatherData?.weather.hourly.wind_direction_10m[0];
-  const visibility = weatherData?.weather.hourly.visibility[0];
   const sunrise = weatherData?.weather.daily.sunrise[0];
   const sunset = weatherData?.weather.daily.sunset[0];
-  const icon = weatherData?.weather.hourly.weather_code[0];
-
-  console.log(time, sunrise, sunset);
+  
+  const temp = weatherData?.weather.hourly.temperature_2m[currentHour];
+  const time = weatherData?.weather.hourly.time[currentHour];
+  const humidity = weatherData?.weather.hourly.relative_humidity_2m[currentHour];
+  const windSpeed = weatherData?.weather.hourly.wind_speed_10m[currentHour];
+  const windDirection = weatherData?.weather.hourly.wind_direction_10m[currentHour];
+  const visibility = weatherData?.weather.hourly.visibility[currentHour];
+  const icon = weatherData?.weather.hourly.weather_code[currentHour];
 
   return weatherData && !weatherData.message ? (
     <div className={styles.wrapper}>
-      <MainCard
-        city={name}
-        country={country}
-        iconName={icon}
-        temp={temp}
-      />
+      <MainCard city={name} country={country} iconName={icon} temp={temp} />
       <ContentBox>
         <Header>
           <DateAndTime time={time} timezone={timezone} />
         </Header>
-        <MetricsBox humidity={humidity} windSpeed={windSpeed} windDirection={windDirection} visibility={visibility} sunrise={sunrise} sunset={sunset} />
+        <MetricsBox
+          humidity={humidity}
+          windSpeed={windSpeed}
+          windDirection={windDirection}
+          timezone={timezone}
+          visibility={visibility}
+          sunrise={sunrise}
+          sunset={sunset}
+        />
       </ContentBox>
     </div>
   ) : weatherData && weatherData.message ? (

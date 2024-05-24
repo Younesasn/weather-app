@@ -21,13 +21,13 @@ export const degToCompass = (num) => {
     "SE",
     "SSE",
     "S",
-    "SSW",
-    "SW",
-    "WSW",
-    "W",
-    "WNW",
-    "NW",
-    "NNW",
+    "SSO",
+    "SO",
+    "OSO",
+    "O",
+    "ONO",
+    "NO",
+    "NNO",
   ];
   return arr[val % 16];
 };

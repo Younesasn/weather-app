@@ -37,12 +37,12 @@ export const MetricsBox = ({ humidity, windSpeed, windDirection, visibility, sun
       <MetricsCard
         title={"Sunrise"}
         iconSrc={"/icons/sunrise.png"}
-        // metric={getTime(sunrise, timezone)}
+        metric={getTime(sunrise, timezone)}
       />
       <MetricsCard
         title={"Sunset"}
         iconSrc={"/icons/sunset.png"}
-        // metric={getTime(sunset, timezone)}
+        metric={getTime(sunset, timezone)}
       />
     </div>
   );
