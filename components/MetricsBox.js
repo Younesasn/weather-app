@@ -1,9 +1,7 @@
 import { degToCompass } from "../services/converters";
 import {
   getTime,
-  getAMPM,
   getVisibility,
-  getWindSpeed,
 } from "../services/helpers";
 import { MetricsCard } from "./MetricsCard";
 import styles from "./MetricsBox.module.css";

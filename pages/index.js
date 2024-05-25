@@ -7,12 +7,12 @@ import { DateAndTime } from "../components/DateAndTime";
 import { MetricsBox } from "../components/MetricsBox";
 import { LoadingScreen } from "../components/LoadingScreen";
 import { ErrorScreen } from "../components/ErrorScreen";
-import * as timezone from 'dayjs/plugin/timezone';
-import * as utc from 'dayjs/plugin/utc';
-import * as localizedFormat from 'dayjs/plugin/localizedFormat';
+import * as timezone from "dayjs/plugin/timezone";
+import * as utc from "dayjs/plugin/utc";
+import * as localizedFormat from "dayjs/plugin/localizedFormat";
 import styles from "../styles/Home.module.css";
 
-const dayjs = require('dayjs');
+const dayjs = require("dayjs");
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -36,14 +36,18 @@ export const App = () => {
   const timezone = weatherData?.weather.utc_offset_seconds;
   const sunrise = weatherData?.weather.daily.sunrise[0];
   const sunset = weatherData?.weather.daily.sunset[0];
-  
-  const currentHour = dayjs.tz(new Date(), weatherData?.weather.timezone).hour();
+
+  const currentHour = dayjs
+    .tz(new Date(), weatherData?.weather.timezone)
+    .hour();
 
   const temp = weatherData?.weather.hourly.temperature_2m[currentHour];
   const time = weatherData?.weather.hourly.time[currentHour];
-  const humidity = weatherData?.weather.hourly.relative_humidity_2m[currentHour];
+  const humidity =
+    weatherData?.weather.hourly.relative_humidity_2m[currentHour];
   const windSpeed = weatherData?.weather.hourly.wind_speed_10m[currentHour];
-  const windDirection = weatherData?.weather.hourly.wind_direction_10m[currentHour];
+  const windDirection =
+    weatherData?.weather.hourly.wind_direction_10m[currentHour];
   const visibility = weatherData?.weather.hourly.visibility[currentHour];
   const icon = weatherData?.weather.hourly.weather_code[currentHour];
 
