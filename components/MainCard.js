@@ -5,18 +5,19 @@ export const MainCard = ({
   city,
   country,
   temp,
+  icon,
 }) => {
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.location}>
         {city}, {country}
       </h1>
-      {/* <Image
+      <Image
         width="300px"
         height="300px"
-        src={`/icons/${iconName}.svg`}
+        src={`/icons/${icon}.svg`}
         alt="weatherIcon"
-      /> */}
+      />
       <h1 className={styles.temperature}>
         {temp}°C
       </h1>

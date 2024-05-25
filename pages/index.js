@@ -10,6 +10,7 @@ import { ErrorScreen } from "../components/ErrorScreen";
 import * as timezone from 'dayjs/plugin/timezone';
 import * as utc from 'dayjs/plugin/utc';
 import * as localizedFormat from 'dayjs/plugin/localizedFormat';
+import styles from "../styles/Home.module.css";
 
 const dayjs = require('dayjs');
 
@@ -17,11 +18,10 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(localizedFormat);
 
-import styles from "../styles/Home.module.css";
-
 export const App = () => {
   const [weatherData, setWeatherData] = useState();
 
+  // Script à implémenter autour du useEffect pour actualiser les données toutes les heures
   useEffect(() => {
     const getData = async () => {
       const res = await fetch("api/data");
@@ -31,15 +31,13 @@ export const App = () => {
     getData();
   }, []);
 
-  
-  // console.log(now);
   const name = weatherData?.geocoding.results[0].name;
   const country = weatherData?.geocoding.results[0].country;
   const timezone = weatherData?.weather.utc_offset_seconds;
   const sunrise = weatherData?.weather.daily.sunrise[0];
   const sunset = weatherData?.weather.daily.sunset[0];
   
-  let currentHour = dayjs.tz(new Date(), weatherData?.weather.timezone).hour();
+  const currentHour = dayjs.tz(new Date(), weatherData?.weather.timezone).hour();
 
   const temp = weatherData?.weather.hourly.temperature_2m[currentHour];
   const time = weatherData?.weather.hourly.time[currentHour];
@@ -51,7 +49,7 @@ export const App = () => {
 
   return weatherData && !weatherData.message ? (
     <div className={styles.wrapper}>
-      <MainCard city={name} country={country} iconName={icon} temp={temp} />
+      <MainCard city={name} country={country} icon={icon} temp={temp} />
       <ContentBox>
         <Header>
           <DateAndTime time={time} timezone={timezone} />
@@ -68,9 +66,9 @@ export const App = () => {
       </ContentBox>
     </div>
   ) : weatherData && weatherData.message ? (
-    <ErrorScreen errorMessage="City not found, try again!"></ErrorScreen>
+    <ErrorScreen errorMessage="Une erreur est survenue"></ErrorScreen>
   ) : (
-    <LoadingScreen loadingMessage="Loading data..." />
+    <LoadingScreen loadingMessage="Chargement des données..." />
   );
 };
 
