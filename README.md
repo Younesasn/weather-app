@@ -1,24 +1,11 @@
-# Weather App
+# Welcome to my Weather App ⛅️
 
-Check the current weather on any city on the planet. Switch between metric and imperial units.
+Dans le cadre d'un test de compétences, j'ai repris le projet de [@madzadev](<https://github.com/madzadev/weather-app>) pour modifier le comportement de l'application.
 
+Le but pour moi était de modifier l'API pour une autre et de faire actualiser toute les heures les données de celle-ci pour rester à jour.
+
+Voici un aperçu de l'ancien projet crée par [@madzadev](<https://github.com/madzadev/weather-app>) : 
 ![Alt img](https://images.ctfassets.net/zlsyc9paq6sa/3uBrJ07WSM40FpolgjInHY/7d886cb4187b52194bf9b63c183a1d3a/1627637330_x.gif)
-
-## Features
-
-1. User's ability to search cities
-
-2. Current local time and date
-
-3. Temperatures and humidity
-
-4. Wind speed and direction
-
-5. Sunrise and sunset times
-
-6. Metric vs Imperial system
-
-7. Error handling and loading info
 
 ## Installation
 
