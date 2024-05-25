@@ -7,6 +7,15 @@ import { DateAndTime } from "../components/DateAndTime";
 import { MetricsBox } from "../components/MetricsBox";
 import { LoadingScreen } from "../components/LoadingScreen";
 import { ErrorScreen } from "../components/ErrorScreen";
+import * as timezone from 'dayjs/plugin/timezone';
+import * as utc from 'dayjs/plugin/utc';
+import * as localizedFormat from 'dayjs/plugin/localizedFormat';
+
+const dayjs = require('dayjs');
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(localizedFormat);
 
 import styles from "../styles/Home.module.css";
 
@@ -22,15 +31,16 @@ export const App = () => {
     getData();
   }, []);
 
-  let now = new Date();
-  let currentHour = now.getHours();
-
+  
+  // console.log(now);
   const name = weatherData?.geocoding.results[0].name;
   const country = weatherData?.geocoding.results[0].country;
   const timezone = weatherData?.weather.utc_offset_seconds;
   const sunrise = weatherData?.weather.daily.sunrise[0];
   const sunset = weatherData?.weather.daily.sunset[0];
   
+  let currentHour = dayjs.tz(new Date(), weatherData?.weather.timezone).hour();
+
   const temp = weatherData?.weather.hourly.temperature_2m[currentHour];
   const time = weatherData?.weather.hourly.time[currentHour];
   const humidity = weatherData?.weather.hourly.relative_humidity_2m[currentHour];
