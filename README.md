@@ -11,7 +11,7 @@ Voici un aperçu de l'ancien projet créée par [@madzadev](https://github.com/m
 ## Installation 📦
 
 > [!WARNING]
-> Utilisez la version 16.20 de Node avec [`NVM`](https://github.com/nvm-sh/nvm) pour faire fonctionner le projet
+> Utilisez la version 16.20 de Node avec [`nvm`](https://github.com/nvm-sh/nvm) pour faire fonctionner le projet
 
 Installez le projet :
 
@@ -19,10 +19,12 @@ Installez le projet :
 npm install
 ```
 
-Créez un fichier `.env.local` à la racine du projet et indiquer la ville :
+Indiquez la ville de votre choix dans `/pages/api/city.json` :
 
-```ini
-CITY_NAME=Paris
+```json
+{
+    "cityName": "Paris"
+}
 ```
 
 Enfin, lancez le projet :
@@ -40,7 +42,7 @@ Il fallait en premier lieu récupérer les données géographique (latitude, lon
 ```js
 export default async function handler(req, res) {
   const getGeocoding = await fetch(
-    `https://geocoding-api.open-meteo.com/v1/search?name=${process.env.CITY_NAME}&count=1&language=fr&format=json`
+    `https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=1&language=fr&format=json`
   );
   const geocoding = await getGeocoding.json();
 
@@ -68,7 +70,7 @@ Il y avait aussi un système de conversion métrique ou impérial, j'ai préfér
 
 J'avais aussi pour consigne d'actualiser les données de l'API toutes les heures.
 
-J'ai découvert un package [`node-cron`](https://www.npmjs.com/package/node-cron), cependant en l'utilisant ce problème apparaissait :
+J'ai découvert un package [`node-cron`](https://www.npmjs.com/package/node-cron), un petit programme de tâche, cependant en l'utilisant ce problème apparaissait :
 
 ![Alt img](public/child_process.png)
 
@@ -90,8 +92,8 @@ cron.schedule("* */1 * * *", () => {
   }, []);
 });
 ```
-Normalement ce script est censé s'executer toutes les heures donc actualiser les données de l'API toutes les heures.
+Il y avait sûrement une solution, en tout cas personnelement j'ai trouvé que celle-là.
 
 ## Conclusion 🔚
 
-Pour une première expérience avec React et son fonctionnement je suis plutôt satisfait de ce que j'ai pu fournir. Vous pouvez voir le résultat depuis [ici](<https://weatherapp-you-dev.vercel.app>).
+Pour une première expérience avec Next et son fonctionnement je suis plutôt satisfait de ce que j'ai pu fournir. Vous pouvez voir le résultat depuis [ici](<https://weatherapp-you-dev.vercel.app>).

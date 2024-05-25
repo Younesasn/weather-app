@@ -1,6 +1,10 @@
+import city from "./city.json";
 export default async function handler(req, res) {
+
+  const { cityName } = city;
+  
   const getGeocoding = await fetch(
-    `https://geocoding-api.open-meteo.com/v1/search?name=${process.env.CITY_NAME}&count=1&language=fr&format=json`
+    `https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=1&language=fr&format=json`
   );
   const geocoding = await getGeocoding.json();
 
