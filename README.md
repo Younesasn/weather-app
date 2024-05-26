@@ -94,4 +94,4 @@ Il y avait sûrement une solution, en tout cas personnelement j'ai trouvé que c
 
 ## Conclusion 🔚
 
-Pour une première expérience avec Next et son fonctionnement je suis plutôt satisfait de ce que j'ai pu fournir. Vous pouvez voir le résultat depuis [ici](<https://weatherapp-you-dev.vercel.app>).
+Pour une première expérience avec Next et son fonctionnement je suis plutôt satisfait de ce que j'ai pu fournir.
