@@ -11,7 +11,7 @@ Voici un aperçu de l'ancien projet créée par [@madzadev](https://github.com/m
 ## Installation 📦
 
 > [!WARNING]
-> Utilisez la version 16.20 de Node avec [`nvm`](https://github.com/nvm-sh/nvm) pour faire fonctionner le projet
+> Utilisez la version 16 de Node avec [`nvm`](https://github.com/nvm-sh/nvm) pour faire fonctionner le projet.
 
 Installez le projet :
 
@@ -19,12 +19,10 @@ Installez le projet :
 npm install
 ```
 
-Indiquez la ville de votre choix dans `/pages/api/city.json` :
+Créez un fichier `.env.local` à la racine du projet et indiquer la ville :
 
-```json
-{
-    "cityName": "Paris"
-}
+```ini
+CITY_NAME=Paris
 ```
 
 Enfin, lancez le projet :
@@ -42,7 +40,7 @@ Il fallait en premier lieu récupérer les données géographique (latitude, lon
 ```js
 export default async function handler(req, res) {
   const getGeocoding = await fetch(
-    `https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=1&language=fr&format=json`
+    `https://geocoding-api.open-meteo.com/v1/search?name=${process.env.CITY_NAME}&count=1&language=fr&format=json`
   );
   const geocoding = await getGeocoding.json();
 
