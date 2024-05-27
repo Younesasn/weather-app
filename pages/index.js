@@ -27,9 +27,8 @@ export const App = () => {
       const data = await res.json();
       setWeatherData({ ...data });
     };
-    getData();
-    const interval = setInterval(getData, 3600000);
-    return () => clearInterval(interval);
+    const update = setInterval(getData(), 3600000);
+    return () => clearInterval(update);
   }, []);
 
   const name = weatherData?.geocoding.results[0].name;
@@ -51,6 +50,8 @@ export const App = () => {
   const windDirection = weatherData?.weather.hourly.wind_direction_10m[hour];
   const visibility = weatherData?.weather.hourly.visibility[hour];
   const icon = weatherData?.weather.hourly.weather_code[hour];
+
+  console.log(currentHour);
 
   return weatherData && !weatherData.message ? (
     <div className={styles.wrapper}>

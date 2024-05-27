@@ -7,6 +7,7 @@ export const MainCard = ({
   temp,
   icon,
 }) => {
+  const tempRound = Math.round(temp);
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.location}>
@@ -19,7 +20,7 @@ export const MainCard = ({
         alt="weatherIcon"
       />
       <h1 className={styles.temperature}>
-        {temp}°C
+        {tempRound}°C
       </h1>
     </div>
   );
