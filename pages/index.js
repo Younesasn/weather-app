@@ -37,26 +37,28 @@ export const App = () => {
   const sunrise = weatherData?.weather.daily.sunrise[0];
   const sunset = weatherData?.weather.daily.sunset[0];
 
-  const currentHour = dayjs
+  const hour = dayjs
     .tz(new Date(), weatherData?.weather.timezone)
     .hour();
 
-  const temp = weatherData?.weather.hourly.temperature_2m[currentHour];
-  const time = weatherData?.weather.hourly.time[currentHour];
+  const currentHour = dayjs.tz(new Date(), weatherData?.weather.timezone).format("HH:mm");
+
+  const temp = weatherData?.weather.hourly.temperature_2m[hour];
+  const day = weatherData?.weather.hourly.time[hour];
   const humidity =
-    weatherData?.weather.hourly.relative_humidity_2m[currentHour];
-  const windSpeed = weatherData?.weather.hourly.wind_speed_10m[currentHour];
+    weatherData?.weather.hourly.relative_humidity_2m[hour];
+  const windSpeed = weatherData?.weather.hourly.wind_speed_10m[hour];
   const windDirection =
-    weatherData?.weather.hourly.wind_direction_10m[currentHour];
-  const visibility = weatherData?.weather.hourly.visibility[currentHour];
-  const icon = weatherData?.weather.hourly.weather_code[currentHour];
+    weatherData?.weather.hourly.wind_direction_10m[hour];
+  const visibility = weatherData?.weather.hourly.visibility[hour];
+  const icon = weatherData?.weather.hourly.weather_code[hour];
 
   return weatherData && !weatherData.message ? (
     <div className={styles.wrapper}>
       <MainCard city={name} country={country} icon={icon} temp={temp} />
       <ContentBox>
         <Header>
-          <DateAndTime time={time} timezone={timezone} />
+          <DateAndTime day={day} hour={currentHour} timezone={timezone} />
         </Header>
         <MetricsBox
           humidity={humidity}
