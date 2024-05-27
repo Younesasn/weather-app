@@ -74,23 +74,7 @@ J'ai découvert un package [`node-cron`](https://www.npmjs.com/package/node-cron
 
 J'ai tenté d'utiliser d'autres packages, même problème. J'ai essayé de changer ma version de Node, toujours pareil.
 
-Je vais donc implémenter la logique dans ce README histoire de montrer comment j'aurai procédé si cela fonctionnait correctement :
-
-```js
-const cron = require("node-cron");
-
-cron.schedule("* */1 * * *", () => {
-  useEffect(() => {
-    const getData = async () => {
-      const res = await fetch("api/data");
-      const data = await res.json();
-      setWeatherData({ ...data });
-    };
-    getData();
-  }, []);
-});
-```
-Il y avait sûrement une solution, en tout cas personnelement j'ai trouvé que celle-là.
+Mais j'ai trouvé une autre solution, beaucoup plus simple à implémenter et à comprendre, à l'aide du `setInterval`, en lui passant le tableau de données et la durée en milliseconde à actualiser.
 
 ## Conclusion 🔚
 

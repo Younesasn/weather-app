@@ -21,7 +21,6 @@ dayjs.extend(localizedFormat);
 export const App = () => {
   const [weatherData, setWeatherData] = useState();
 
-  // Script à implémenter autour du useEffect pour actualiser les données toutes les heures
   useEffect(() => {
     const getData = async () => {
       const res = await fetch("api/data");
@@ -29,6 +28,8 @@ export const App = () => {
       setWeatherData({ ...data });
     };
     getData();
+    const interval = setInterval(getData, 3600000);
+    return () => clearInterval(interval);
   }, []);
 
   const name = weatherData?.geocoding.results[0].name;
@@ -37,19 +38,17 @@ export const App = () => {
   const sunrise = weatherData?.weather.daily.sunrise[0];
   const sunset = weatherData?.weather.daily.sunset[0];
 
-  const hour = dayjs
-    .tz(new Date(), weatherData?.weather.timezone)
-    .hour();
+  const hour = dayjs.tz(new Date(), weatherData?.weather.timezone).hour();
 
-  const currentHour = dayjs.tz(new Date(), weatherData?.weather.timezone).format("HH:mm");
+  const currentHour = dayjs
+    .tz(new Date(), weatherData?.weather.timezone)
+    .format("HH:mm");
 
   const temp = weatherData?.weather.hourly.temperature_2m[hour];
   const day = weatherData?.weather.hourly.time[hour];
-  const humidity =
-    weatherData?.weather.hourly.relative_humidity_2m[hour];
+  const humidity = weatherData?.weather.hourly.relative_humidity_2m[hour];
   const windSpeed = weatherData?.weather.hourly.wind_speed_10m[hour];
-  const windDirection =
-    weatherData?.weather.hourly.wind_direction_10m[hour];
+  const windDirection = weatherData?.weather.hourly.wind_direction_10m[hour];
   const visibility = weatherData?.weather.hourly.visibility[hour];
   const icon = weatherData?.weather.hourly.weather_code[hour];
 
