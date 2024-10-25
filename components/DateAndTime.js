@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getWeekDay, getCurrentTime } from "../services/helpers";
+import { getWeekDay } from "../services/helpers";
 import styles from "./DateAndTime.module.css";
 
 export const DateAndTime = ({ hour, day, timezone }) => {
