@@ -43,15 +43,13 @@ export const App = () => {
     .tz(new Date(), weatherData?.weather.timezone)
     .format("HH:mm");
 
-  const temp = weatherData?.weather.hourly.temperature_2m[hour];
   const day = weatherData?.weather.hourly.time[hour];
+  const temp = weatherData?.weather.hourly.temperature_2m[hour];
   const humidity = weatherData?.weather.hourly.relative_humidity_2m[hour];
   const windSpeed = weatherData?.weather.hourly.wind_speed_10m[hour];
   const windDirection = weatherData?.weather.hourly.wind_direction_10m[hour];
   const visibility = weatherData?.weather.hourly.visibility[hour];
   const icon = weatherData?.weather.hourly.weather_code[hour];
-
-  console.log(currentHour);
 
   return weatherData && !weatherData.message ? (
     <div className={styles.wrapper}>
